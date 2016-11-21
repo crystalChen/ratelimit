@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+
+	<context:annotation-config />
+	<context:component-scan base-package="com.lian.iprd.ratelimit.*" />
+	<aop:aspectj-autoproxy proxy-target-class="true"
+		expose-proxy="true" />
+
+
+	<!--注解形式限流-->
+	<aop:config>
+		<aop:aspect ref="annotationRateLimitAspectJ">
+			<aop:pointcut id="annotationRatePointcut"
+						  expression="execution(@com.lian.iprd.ratelimit.aop.RateLimit * *(..))" />
+			<aop:around method="around" pointcut-ref="annotationRatePointcut" />
+		</aop:aspect>
+	</aop:config>
+
+	<!-- json形式限流-->
+	<!--<aop:config>-->
+		<!--<aop:aspect ref="jsonRateLimitAspectJ">-->
+			<!--<aop:pointcut id="jsonRatePointcut"-->
+						  <!--expression="execution(* com.lian.iprd.ratelimit.test.*.*(..) )" />-->
+			<!--<aop:around method="around" pointcut-ref="jsonRatePointcut" />-->
+		<!--</aop:aspect>-->
+	<!--</aop:config>-->
+	<!--<bean id="jsonRateLimitAspectJ" class="com.lian.iprd.ratelimit.aop.impl.JsonRateLimitAspectJ"></bean>-->
+
+</beans>

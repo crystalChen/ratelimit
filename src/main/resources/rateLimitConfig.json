@@ -1,0 +1,25 @@
+{
+	"classList": [
+	  {
+		"className": "com.lian.iprd.ratelimit.test.DemoService",
+		"classQPS": 6666,
+		"methodList": [
+		  {
+			"methodName": "testJson", "qps": 1800002, "timeout":10000
+		  }
+		]
+	  },
+	  {
+		"className": "defClass",
+		"classQPS": 123,
+		"methodList": [
+		  {
+			"methodName": "def", "qps": 16, "timeout":120, "warmupPeriod":333
+		  },
+		  {
+			"methodName": "ddd", "qps": 33, "timeout":130
+		  }
+		]
+	  }
+	]
+}
